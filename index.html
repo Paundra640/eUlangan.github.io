@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ulangan Online</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <section class="page active" id="login-page">
+      <div class="container">
+        <header class="page-header">
+          <h1>Ulangan Online</h1>
+        </header>
+        <form id="login-form">
+          <label for="kode">Kode Siswa</label>
+          <input type="text" id="kode" name="kode" required maxlength="20" autocomplete="off" placeholder="Contoh: SISWA001" pattern="[A-Za-z0-9]+">
+          <button type="submit" id="login-button">
+            <span class="button-text">Login</span>
+            <span class="spinner" style="display: none;"></span>
+          </button>
+          <div id="login-error" class="error"></div>
+        </form>
+        <div id="student-info" class="hidden">
+          <p><strong>Nama:</strong> <span id="student-name"></span></p>
+          <p><strong>Kelas:</strong> <span id="student-class"></span></p>
+          <label for="subject">Pilih Mata Pelajaran:</label>
+          <select id="subject" disabled>
+            <option value="">-- Pilih Mapel --</option>
+          </select>
+          <button id="start-exam" disabled>Mulai Ujian</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="exam-page">
+      <div class="container exam-container">
+        <header id="exam-header"></header>
+        <main id="exam-body"></main>
+        <footer id="exam-footer"></footer>
+      </div>
+    </section>
+
+    <section class="page" id="result-page">
+       <div class="container">
+        <h3>Hasil Ujian</h3>
+        <div id="result-details">
+            <!-- Hasil akan dimasukkan oleh JS -->
+        </div>
+        <div class="result-actions">
+            <button id="download-txt">Download TXT</button>
+            <button id="ulang" class="secondary">Ulang Ujian</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="loading-overlay" class="hidden">
+      <div class="spinner"></div>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
