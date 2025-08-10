@@ -276,14 +276,14 @@ function showResultPage(soal) {
 function sendToGoogleForm(data) {
   // Ganti entry.xxxxx dengan entry ID Google Form Anda
   const formData = new FormData();
-  formData.append('entry.111111', data.kode);
-  formData.append('entry.222222', data.nama);
-  formData.append('entry.333333', data.kelas);
-  formData.append('entry.444444', data.mapel);
-  formData.append('entry.555555', data.nilai);
-  formData.append('entry.666666', data.benar);
-  formData.append('entry.777777', data.salah);
-  formData.append('entry.888888', data.persentase);
+  formData.append('entry.520446943', data.kode);
+  formData.append('entry.1628961525', data.nama);
+  formData.append('entry.747101562', data.kelas);
+  formData.append('entry.1355887105', data.mapel);
+  formData.append('entry.1137235855', data.nilai);
+  formData.append('entry.261964328', data.benar);
+  formData.append('entry.1393522577', data.salah);
+  formData.append('entry.1736042177', data.persentase);
   fetch(GOOGLE_FORM_URL, { method: 'POST', mode: 'no-cors', body: formData });
 }
 
@@ -296,4 +296,5 @@ window.onload = function() {
     document.getElementById('login-form').dispatchEvent(new Event('submit'));
   }
 };
+
 
