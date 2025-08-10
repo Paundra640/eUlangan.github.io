@@ -1,7 +1,7 @@
 // --- Konfigurasi URL Google Sheets CSV ---
 const SHEET_SISWA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS8rrgd7UIqQHhrzlrM9Ox6dkOk0CxSrkz8cvqw75KEVJ4EVnWi2WdgO1eZgg_s1TJ5YsR27enX5pp7/pub?output=csv';
 const SHEET_SOAL_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvcpWahUPIGvIfbxARRnYX2IkW4LaCsXVXypKTwYjVU2GaFR5nBvvmCE5h5z58JibnKDMQJDwu8kNV/pub?output=csv';
-const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiI70dJOcWujiydNBj4afR4h0cMqDVrIGnTBalBHpdEA4qEg/viewform?usp=header';
+const GOOGLE_FORM_URL = 'https://docs.google.com/spreadsheets/d/1ExLCAcQQwJG8m7fbO9XE7X9AqIMztWIt2lW6TVokudc/edit?usp=sharing';
 
 // --- DOM Elements ---
 const loginPage = document.getElementById('login-page');
@@ -296,6 +296,7 @@ window.onload = function() {
     document.getElementById('login-form').dispatchEvent(new Event('submit'));
   }
 };
+
 
 
 
