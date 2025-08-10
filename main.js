@@ -1,7 +1,7 @@
 // --- Konfigurasi URL Google Sheets CSV ---
 const SHEET_SISWA_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS8rrgd7UIqQHhrzlrM9Ox6dkOk0CxSrkz8cvqw75KEVJ4EVnWi2WdgO1eZgg_s1TJ5YsR27enX5pp7/pub?output=csv';
 const SHEET_SOAL_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSvcpWahUPIGvIfbxARRnYX2IkW4LaCsXVXypKTwYjVU2GaFR5nBvvmCE5h5z58JibnKDMQJDwu8kNV/pub?output=csv';
-const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfiI70dJOcWujiydNBj4afR4h0cMqDVrIGnTBalBHpdEA4qEg/viewform?usp=header';
+const GOOGLE_FORM_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRJBBmwaiRd2-yOYVk-ADRT9FWoxgQFMotILrozV3em0aS3vXqlY2DtV-xSnQjds2yP3EcCAm806GVf/pub?output=csv';
 
 // --- DOM Elements ---
 const loginPage = document.getElementById('login-page');
@@ -156,22 +156,22 @@ function showExamPage(soal) {
     const jawaban = JSON.parse(localStorage.getItem('jawaban') || '{}');
     const s = soal[idx];
     const siswa = JSON.parse(localStorage.getItem('siswa')) || {};
-    // Navigasi nomor soal
-    let nomorNav = '<div class="nav-row">';
-    nomorNav += '<div class="nav-info">';
-    nomorNav += `<div><b>Nama:</b> ${siswa.nama||'-'}</div>`;
-    nomorNav += `<div><b>Kelas:</b> ${siswa.kelas||'-'}</div>`;
-    nomorNav += `<div><b>Mapel:</b> ${localStorage.getItem('subject')||'-'}</div>`;
-    nomorNav += `<div><b>Sisa waktu:</b> <span id="waktu">${formatMenitDetik(waktu)}</span> menit</div>`;
-    nomorNav += '</div>';
-    nomorNav += '<div class="nomor-nav">';
+
+    // Header Info
+    let headerInfo = '<div class="header-info">';
+    headerInfo += `<div><b>Nama:</b> ${siswa.nama||'-'} | <b>Kelas:</b> ${siswa.kelas||'-'} | <b>Mapel:</b> ${localStorage.getItem('subject')||'-'}</div>`;
+    headerInfo += `<div><b>Sisa waktu:</b> <span id="waktu">${formatMenitDetik(waktu)}</span></div>`;
+    headerInfo += '</div>';
+
+    // Question Navigation (at the bottom)
+    let nomorNav = '<div class="nomor-nav">';
     for(let i=0;i<soal.length;i++) {
       nomorNav += `<button class="nomor-btn${i===idx?' active':''}${jawaban[i]?' answered':''}" data-no="${i}">${i+1}</button>`;
     }
     nomorNav += '</div>';
-    nomorNav += '</div>';
+
     examPage.innerHTML = `
-      ${nomorNav}
+      ${headerInfo}
       <div class="soal">
         <div class="soal-header"><b>Soal ${idx+1} dari ${soal.length}</b></div>
         <div class="soal-pertanyaan">${s.Pertanyaan}</div>
@@ -189,8 +189,10 @@ function showExamPage(soal) {
         <button id="next" ${idx===soal.length-1?'disabled':''}>Next</button>
         <button id="finish">Selesai</button>
       </div>
+      ${nomorNav}
     `;
-    // Event navigasi nomor soal
+
+    // Event listeners
     document.querySelectorAll('.nomor-btn').forEach(btn => {
       btn.onclick = function() {
         idx = parseInt(this.getAttribute('data-no'));
@@ -201,7 +203,7 @@ function showExamPage(soal) {
       radio.addEventListener('change', function() {
         jawaban[idx] = this.value;
         localStorage.setItem('jawaban', JSON.stringify(jawaban));
-        renderSoal(); // update highlight dan nomor
+        renderSoal();
       });
     });
     document.getElementById('prev').onclick = () => { if(idx>0){idx--;renderSoal();} };
